@@ -1,0 +1,151 @@
+open jenkins- 
+
+http://localhost:8080
+
+2. create folder and open vs code -> code . 
+
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My CI/CD Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to Jenkins CI/CD Experiment</h1>
+    <p>This is my first automated deployment.</p>
+    <button onclick="showMessage()">Click Me</button>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+style.css
+
+body {
+    font-family: Arial;
+    text-align: center;
+    background-color: lightblue;
+    padding: 50px;
+}
+
+h1 {
+    color: darkblue;
+}
+
+
+
+script.js
+
+function showMessage() {
+    alert("Jenkins CI/CD is working!");
+}
+
+
+
+Jenkinsfile
+pipeline {
+    agent any
+
+    environment {
+        DEPLOY_DIR = 'C:\\inetpub\\wwwroot'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Getting code from GitHub'
+                git branch: 'main',
+                url: 'YOUR_GITHUB_REPOSITORY_URL' // paste your own url 
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building Web Application'
+                bat 'dir'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing Web Application'
+                bat 'if not exist index.html exit /b 1'
+                bat 'if not exist style.css exit /b 1'
+                bat 'if not exist script.js exit /b 1'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying Application'
+
+                bat 'if not exist "%DEPLOY_DIR%" mkdir "%DEPLOY_DIR%"'
+
+                bat 'xcopy /Y /I index.html "%DEPLOY_DIR%\\"'
+                bat 'xcopy /Y /I style.css "%DEPLOY_DIR%\\"'
+                bat 'xcopy /Y /I script.js "%DEPLOY_DIR%\\"'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed! Check console output.'
+        }
+    }
+}
+
+
+3. Create  repository
+
+New repository. -
+jenkins-ci-cd-experiment
+
+4. git commit commands 
+
+git init 
+git add .
+git commit -m "Initial commit - Web application"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/Jenkins-CICD-Experiment6.git
+git push -u origin main
+
+5. Create a Pipeline Job in Jenkins
+
+Click New Item. 
+ name -CI-CD-Web-Application
+ Select Pipeline.
+ Click OK.
+
+ 6 . 
+ Scroll down to the Pipeline section.
+ Under Definition, select:
+Pipeline script from SCM
+ Select SCM as Git.
+Enter your GitHub repository URL.
+
+Set Branch Specifier to:
+*/main
+
+Set Script Path to:
+Jenkinsfile
+
+
+SCM -
+1. Find the Build Triggers section.
+2. Check the option Poll SCM.
+3. In the Schedule box, enter:
+* * * * *
+
+save -> build 
+
+7. update html code and check build 2 and website change 
+
