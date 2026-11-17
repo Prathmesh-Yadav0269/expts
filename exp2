@@ -1,0 +1,92 @@
+1. Check Git installation and configure
+
+git --version
+
+git config --global user.name "Prathamesh Yadav"
+
+git config --global user.email "YOUR_GITHUB_EMAIL"
+
+git config --global --list
+
+2. intialize git 
+
+git init 
+
+3. create code files
+
+
+notepad Addition.java
+
+
+
+class Addition {
+    public static void main(String[] args) {
+        int a = 10, b = 20;
+
+        int sum = a + b;
+
+        System.out.println("Sum = " + sum);
+    }
+}
+
+
+notepad EvenOdd.java
+
+
+class EvenOdd {
+    public static void main(String[] args) {
+        int n = 10;
+
+        if (n % 2 == 0)
+            System.out.println("Even Number");
+        else
+            System.out.println("Odd Number");
+    }
+}
+
+
+
+notepad README.md
+
+
+# DevOps Experiment 2 - Git and Version Control
+
+**Name:** Prathamesh Yadav
+
+**Roll Number:** PRN
+
+## Java Programs
+
+1. Addition - Adds two numbers.
+2. EvenOdd - Checks whether a number is even or odd.
+
+## Compilation and Execution
+
+Compile Java programs:
+javac Addition.java
+
+Run Java programs:
+java Addition
+
+
+
+
+
+4. create github repo
+
+
+5. push codes to github
+
+git status
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Prathmesh-Yadav0269/devops_exp2.git
+git push -u origin main
+git status
+
+
+6. verify repositiory
+
+git log --oneline
+git remote -v
