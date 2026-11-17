@@ -1,0 +1,89 @@
+1. check versions 
+
+java -version
+javac -version
+git --version
+
+
+2. Check Jenkins 
+link 
+http://localhost:8080
+
+
+3 . crete java fle in folder
+
+notepad HelloWorld.java
+
+
+
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+        System.out.println("Welcome to Jenkins Automation");
+        System.out.println("Experiment No. 5 - Build Successful");
+    }
+}
+
+
+4. run java code 
+
+javac HelloWorld.java
+java HelloWorld
+
+
+4. git repo create and  push commands
+git init
+git add HelloWorld.java
+git commit -m "Initial commit - Java HelloWorld program"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/Jenkins-Experiment-5.git
+git push -u origin main
+
+
+5. jenkins 
+
+
+Create a new job
+1. Click New Item.
+2. Enter the item name:
+HelloWorld-Build
+
+Select Freestyle project.
+Click OK.
+
+2. 
+
+Find Source Code Management.
+Select Git.
+In Repository URL, paste your GitHub repository URL.
+
+3. 
+4. Credentials:  - none - 
+5. Branch Specifier:
+*/main
+
+4.
+Find Build Triggers.
+
+For now, select:
+Select this option
+Poll SCM
+
+In the Schedule box, enter:
+H/5 * * * *
+
+5.
+
+Build Steps.
+1. Click Add build step.
+2. Select Execute Windows batch command.
+3. Enter the following commands:
+
+javac HelloWorld.java
+
+java HelloWorld
+
+6. Click Save -> build now 
+
+7. update code -> and build now 
