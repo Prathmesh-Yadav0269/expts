@@ -1,0 +1,154 @@
+Part 2: Verify Java and Maven
+
+3. Check Java version
+java -version
+
+
+4. Check Java compiler
+javac -version
+
+
+5. Check JAVA_HOME
+echo %JAVA_HOME%
+
+
+6. Check Maven version
+mvn -version
+
+
+
+Create the project
+1. Click this option:
+Select this
+Maven: New Project...
+
+Do not select Spring Initializr.
+
+2. Select Maven archetype
+
+maven-archetype-quickstart
+
+4. Enter project details
+
+Use these values:
+Field	Enter
+Group Id	com.example
+Artifact Id	demo
+Version	1.0-SNAPSHOT
+Package	com.example
+
+
+5. Open App.java
+Navigate to:
+src → main → java → com → example → App.java
+
+package com.example;
+
+public class App {
+
+    public static void main(String[] args) {
+
+        System.out.println("Hello from Maven Project!");
+
+    }
+}
+
+
+Navigate to:
+src → test → java → com → example → AppTest.java
+
+package com.example;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class AppTest {
+
+    @Test
+    public void testApp() {
+
+        assertTrue(true);
+
+    }
+}
+
+
+
+6.
+
+demo → pom.xml
+
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+
+
+7. 
+mvn clean
+
+8.
+mvn validate
+
+9.
+mvn compile
+
+10.
+mvn test
+
+11.
+mvn package
+
+12.
+dir
+
+13.
+dir target
+
+14.
+Execute Java application using Maven
+
+mvn exec:java -Dexec.mainClass="com.example.App"
+
