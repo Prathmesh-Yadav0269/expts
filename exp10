@@ -1,0 +1,144 @@
+1. create folder and run also open the docker dekstop
+
+docker --version
+docker ps
+
+Check kubectl installation Run:
+
+kubectl version --client
+minikube version
+minikube start --driver=docker
+
+2. Verify Kubernetes cluster
+
+kubectl cluster-info
+
+kubectl get nodes
+
+kubectl cluster-info
+
+kubectl get nodes
+
+3. in projec folder Create deployment.yaml
+
+notepad deployment.yaml
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+
+  template:
+    metadata:
+      labels:
+        app: nginx
+
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+
+
+
+4. Create the Deployment
+
+kubectl apply -f deployment.yaml
+
+kubectl get deployments
+
+kubectl get pods
+
+// wait to get all pods start
+
+kubectl get pods
+
+kubectl get deployments
+
+kubectl describe pods
+
+5. Create Kubernetes Service
+
+notepad service.yaml
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+
+spec:
+  selector:
+    app: nginx
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+  type: NodePort
+
+
+
+
+kubectl apply -f service.yaml
+
+kubectl get services
+
+minikube service nginx-service --url
+
+// Keep the CMD window running and open new cmd in same folder 
+
+1. run on new terminal
+
+kubectl get all
+
+kubectl describe deployment nginx-deployment
+
+kubectl scale deployment nginx-deployment --replicas=5
+
+kubectl get pods
+
+kubectl get deployments
+
+kubectl scale deployment nginx-deployment --replicas=3
+
+kubectl get pods
+
+kubectl get deployments
+
+
+
+// Expected final outputs
+
+kubectl get nodes
+
+kubectl get deployments
+
+kubectl get pods
+
+kubectl get services
+
+ // this is on another terminal already in running 
+ 
+minikube service nginx-service --url
+
+
+// final Delete Kubernetes resources 
+
+Delete Deployment:
+kubectl delete -f deployment.yaml
+
+Delete Service:
+kubectl delete -f service.yaml
+
+
+kubectl get all
